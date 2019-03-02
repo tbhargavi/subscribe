@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHONE DIRECTORY</title>
+
+    <style>
+    
+              
+        table 
+        {
+            width: 70%;
+            font: 17px Calibri;
+        }
+        table, th, td 
+        {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+          
+            
+
+
+        
+    </style>
+</head>
+<body onload="createTable()">
+    <p>ADD SUBSCRIBER.</p>
+    <p>
+        <input type="button" id="addRow" value="Add" onclick="addRow()" />
+    </p>
+
+    
+    <div id="cont"></div>
+
+    
+</body>
+
+<script>
+    
+    var arrHead = new Array();
+    arrHead = ['', 'NAME', 'PHONE'];      
+
+    
+    function createTable() {
+        var empTable = document.createElement('table');
+        empTable.setAttribute('id', 'empTable');            
+
+        var tr = empTable.insertRow(-1);
+
+        for (var h = 0; h < arrHead.length; h++) {
+            var th = document.createElement('th');         
+            th.innerHTML = arrHead[h];
+            tr.appendChild(th);
+        }
+
+        var div = document.getElementById('cont');
+        div.appendChild(empTable);   
+    }
+
+    
+    function addRow() {
+        var empTab = document.getElementById('empTable');
+
+        var rowCnt = empTab.rows.length;        
+        var tr = empTab.insertRow(rowCnt);
+        tr = empTab.insertRow(rowCnt);
+
+        for (var c = 0; c < arrHead.length; c++) {
+            var td = document.createElement('td');       
+            td = tr.insertCell(c);
+
+            if (c == 0) {           
+                
+                var button = document.createElement('input');
+
+                
+                button.setAttribute('type', 'button');
+                button.setAttribute('value', 'Delete');
+
+                
+                button.setAttribute('onclick', 'removeRow(this)');
+
+                td.appendChild(button);
+            }
+            else {
+                
+                var ele = document.createElement('input');
+                ele.setAttribute('type', 'text');
+                ele.setAttribute('value', '');
+
+                td.appendChild(ele);
+            }
+        }
+    }
+
+    
+    function removeRow(oButton) {
+        var empTab = document.getElementById('empTable');
+        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);      
+    }
+
+    
+</script>
+</html>
